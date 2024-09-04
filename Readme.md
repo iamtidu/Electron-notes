@@ -96,34 +96,38 @@ Electron.js is an open-source framework developed by GitHub that enables develop
 ### Key Features:
 
 - **Cross-Platform Compatibility:** Write code once and deploy it across multiple operating systems.
-- Web Technologies: Utilize the familiarity and power of web development tools and languages.
-Access to Native APIs: Through Node.js integration, Electron apps can interact with the file system and other OS-level APIs.
-Rich Ecosystem: Benefit from a vast collection of npm packages and Electron-specific modules.
-Automatic Updates: Built-in mechanisms to update applications smoothly.
-History and Evolution
-2013: Electron began as "Atom Shell," developed by Cheng Zhao for GitHub's Atom text editor.
-2014: GitHub open-sourced Atom Shell.
-2015: Atom Shell was rebranded to Electron.
-2016-Present: Electron gained widespread adoption, with major companies using it for their desktop applications. Continuous development has led to performance improvements, enhanced security, and new features.
-Use Cases and Popular Applications
+- **Web Technologies:** Utilize the familiarity and power of web development tools and languages.
+- **Access to Native APIs:** Through Node.js integration, Electron apps can interact with the file system and other OS-level APIs.
+- **Rich Ecosystem:** Benefit from a vast collection of npm packages and Electron-specific modules.
+- **Automatic Updates:** Built-in mechanisms to update applications smoothly.
+
+### History and Evolution
+- 2013: Electron began as "Atom Shell," developed by Cheng Zhao for GitHub's Atom text editor.
+- 2014: GitHub open-sourced Atom Shell.
+- 2015: Atom Shell was rebranded to Electron.
+- 2016-Present: Electron gained widespread adoption, with major companies using it for their desktop applications. Continuous development has led to performance improvements, enhanced security, and new features.
+
+### Use Cases and Popular Applications
 Electron is favored for its ability to deliver a native desktop experience using web development skills.
 
-Popular Applications Built with Electron:
+#### Popular Applications Built with Electron:
 
-Visual Studio Code: A powerful code editor from Microsoft.
-Slack: A collaboration and communication platform.
-Discord: A voice, video, and text chat app for gamers and communities.
-GitHub Desktop: A GUI for managing GitHub repositories.
-Atom: A customizable text editor.
-Figma: A collaborative interface design tool.
-Use Cases:
+- **Visual Studio Code:** A powerful code editor from Microsoft.
+- **Slack:** A collaboration and communication platform.
+- **Discord:** A voice, video, and text chat app for gamers and communities.
+- **GitHub Desktop:** A GUI for managing GitHub repositories.
+- **Atom:** A customizable text editor.
+- **Figma:** A collaborative interface design tool.
 
-Developer Tools: IDEs, code editors, and Git clients.
-Communication Platforms: Messaging and video conferencing apps.
-Productivity Software: Note-taking apps, project management tools.
-Media Players: Applications for playing audio and video files.
-Design Tools: Software for UI/UX design and prototyping.
-2. Setting Up the Environment
+#### Use Cases:
+
+- **Developer Tools:** IDEs, code editors, and Git clients.
+- **Communication Platforms:** Messaging and video conferencing apps.
+- **Productivity Software:** Note-taking apps, project management tools.
+- **Media Players:** Applications for playing audio and video files.
+- **Design Tools:** Software for UI/UX design and prototyping.
+
+## 2. Setting Up the Environment
 Prerequisites (Node.js, npm)
 Before diving into Electron development, ensure you have the following installed:
 
