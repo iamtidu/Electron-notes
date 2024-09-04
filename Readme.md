@@ -318,77 +318,82 @@ Example:
   }
 }
 ```
-Using main.js and index.html
-main.js: Manages the application's lifecycle, creates windows, and handles system events.
-index.html: The front-end interface displayed in the application window.
-How They Interact:
+### Using `main.js` and `index.html`
+- `main.js:` Manages the application's lifecycle, creates windows, and handles system events.
+- `index.html:` The front-end interface displayed in the application window.
+**How They Interact:**
 
-main.js creates a BrowserWindow and loads index.html.
-index.html can include scripts and styles to build the UI.
-Communicating Between Processes (IPC)
-IPC Modules
-ipcMain: Used in the main process.
-ipcRenderer: Used in the renderer process.
-Sending Messages
-From Renderer to Main:
+- `main.js` creates a BrowserWindow and loads index.html.
+- `index.html` can include scripts and styles to build the UI.
+### Communicating Between Processes (IPC)
+#### IPC Modules
+- `ipcMain:` Used in the main process.
+- `ipcRenderer:` Used in the renderer process.
+#### Sending Messages
+**From Renderer to Main:**
+- Renderer Process (`renderer.js`):
 
-Renderer Process (renderer.js):
-
-javascript
-Copy code
+```javascript
 const { ipcRenderer } = require('electron');
 ipcRenderer.send('channel-name', 'message');
-Main Process (main.js):
+```
 
-javascript
-Copy code
+- Main Process (`main.js`):
+
+```javascript
 const { ipcMain } = require('electron');
 ipcMain.on('channel-name', (event, arg) => {
   console.log(arg); // 'message'
 });
-From Main to Renderer:
+```
+**From Main to Renderer:**
 
-Main Process (main.js):
+- Main Process (`main.js`):
 
-javascript
-Copy code
+```javascript
 event.reply('reply-channel', 'response');
-Renderer Process (renderer.js):
+```
 
-javascript
-Copy code
+- Renderer Process (`renderer.js`):
+
+
+```javascript
 ipcRenderer.on('reply-channel', (event, arg) => {
   console.log(arg); // 'response'
 });
-Using contextBridge and preload.js for Security:
+```
 
-Expose specific APIs to the renderer process without exposing the entire Node.js environment.
+**Using `contextBridge` and `preload.js` for Security:**
+
+- Expose specific APIs to the renderer process without exposing the entire Node.js environment.
+
 Example:
 
-preload.js:
+- `preload.js:`
 
-javascript
-Copy code
+```javascript
+
 const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('electronAPI', {
   sendMessage: (message) => ipcRenderer.send('channel-name', message),
   onMessage: (callback) => ipcRenderer.on('reply-channel', callback),
 });
-renderer.js:
+```
 
-javascript
-Copy code
+- `renderer.js:`
+
+```javascript
 window.electronAPI.sendMessage('Hello from Renderer');
 window.electronAPI.onMessage((event, message) => {
   console.log(message);
 });
-Creating Windows (BrowserWindow API)
-The BrowserWindow class is used to create and manage application windows.
+```
+### Creating Windows (BrowserWindow API)
+The `BrowserWindow` class is used to create and manage application windows.
 
-Creating a Window
-javascript
-Copy code
+#### Creating a Window
+```javascript
 const { BrowserWindow } = require('electron');
 
 function createWindow() {
@@ -405,105 +410,112 @@ function createWindow() {
 
   win.loadFile('index.html');
 }
-BrowserWindow Options
-width and height: Set window dimensions.
-resizable: Boolean indicating if the window can be resized.
-fullscreen: Open the window in fullscreen mode.
-icon: Path to the window's icon.
-webPreferences: Web content settings.
-Managing Multiple Windows
-Create multiple instances of BrowserWindow for multi-window applications.
-Keep track of windows to prevent garbage collection.
-4. Building the User Interface
-Using HTML/CSS/JavaScript in Electron
+```
+#### BrowserWindow Options
+- `width` and `height`: Set window dimensions.
+- `resizable`: Boolean indicating if the window can be resized.
+- `fullscreen`: Open the window in fullscreen mode.
+- `icon`: Path to the window's icon.
+- `webPreferences`: Web content settings.
+#### Managing Multiple Windows
+- Create multiple instances of `BrowserWindow` for multi-window applications.
+- Keep track of windows to prevent garbage collection.
+
+## 4. Building the User Interface
+### Using HTML/CSS/JavaScript in Electron
 Electron's renderer process behaves like a web browser, allowing you to use:
 
-HTML: For structuring content.
-CSS: For styling.
-JavaScript: For interactivity.
-Including External Resources:
+- **HTML:** For structuring content.
+- **CSS:** For styling.
+- **JavaScript:** For interactivity.
 
-CSS Stylesheets:
+**Including External Resources:**
 
-html
-Copy code
+- CSS Stylesheets:
+
+```html
 <link rel="stylesheet" href="styles.css" />
-JavaScript Files:
+```
+- JavaScript Files:
 
-html
-Copy code
+```html
 <script src="renderer.js"></script>
-Loading External Resources
-Local Resources
-Store images, fonts, and other assets in your project's directory.
+```
+#### Loading External Resources
+**Local Resources**
 
-Reference them using relative paths.
+- Store images, fonts, and other assets in your project's directory.
 
-html
-Copy code
+- Reference them using relative paths.
+
+```html
 <img src="images/logo.png" alt="App Logo" />
-Web Resources
-Load resources from the internet cautiously.
+```
+**Web Resources**
 
-Be aware of security implications.
+- Load resources from the internet cautiously.
+- Be aware of security implications.
 
-html
-Copy code
+```html
 <script src="https://cdn.example.com/library.js"></script>
-Security Tip: Enable a Content Security Policy (CSP) to mitigate risks.
+```
+**Security Tip:** Enable a Content Security Policy (CSP) to mitigate risks.
 
-Integrating Frontend Frameworks (React, Angular, Vue)
+##### Integrating Frontend Frameworks (React, Angular, Vue)
+
 Electron can be combined with popular frontend frameworks for building complex UIs.
 
-React Integration
-Initialize a React App:
+**React Integration**
 
-bash
-Copy code
+**1. Initialize a React App:**
+
+```bash
 npx create-react-app my-electron-app
 cd my-electron-app
-Install Electron:
+```
+**2. Install Electron:**
 
-bash
-Copy code
+```bash
 npm install electron --save-dev
-Modify package.json:
+```
+**3. Modify `package.json`:**
 
 Add Electron start scripts and set the main entry point.
 
-Build and Run:
+**4. Build and Run:**
 
-Development Mode:
+- **Development Mode:**
 
-Use tools like electron-forge or electron-builder to streamline development.
+Use tools like `electron-forge`  or `electron-builder` to streamline development.
 
-Production Build:
+- **Production Build:**
 
-bash
-Copy code
+```bash
 npm run build
 npm run electron
-Angular and Vue Integration
-Angular:
+```
+
+#### Angular and Vue Integration
+- **Angular:**
 
 Use the Angular CLI to set up the project, then configure Electron to load the compiled Angular application.
 
-Vue:
+- **Vue:**
 
-Use Vue CLI for project setup, then integrate Electron using plugins like electron-builder.
+Use Vue CLI for project setup, then integrate Electron using plugins like `electron-builder`.
 
-Working with Preload Scripts
+### Working with Preload Scripts
 Preload scripts bridge the gap between the main and renderer processes while maintaining security.
 
-Purpose of Preload Scripts
-Run in the renderer process before web content is loaded.
-Have access to both DOM APIs and limited Node.js APIs.
-Used to expose safe APIs via contextBridge.
-Setting Up a Preload Script
-In main.js:
+#### Purpose of Preload Scripts
+- Run in the renderer process before web content is loaded.
+- Have access to both DOM APIs and limited Node.js APIs.
+- Used to expose safe APIs via `contextBridge`.
 
-javascript
-Copy code
+#### Setting Up a Preload Script
+In `main.js`:
+
+```javascript
 const win = new BrowserWindow({
   webPreferences: {
     preload: __dirname + '/preload.js',
@@ -511,10 +523,10 @@ const win = new BrowserWindow({
     contextIsolation: true,
   },
 });
-In preload.js:
+```
+In `preload.js`:
 
-javascript
-Copy code
+```javascript
 const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('api', {
@@ -522,10 +534,10 @@ contextBridge.exposeInMainWorld('api', {
   receive: (channel, func) =>
     ipcRenderer.on(channel, (event, ...args) => func(...args)),
 });
-In renderer.js:
+```
+In `renderer.js`:
 
-javascript
-Copy code
+```javascript
 // Sending a message to the main process
 window.api.send('channel-name', 'Hello from Renderer');
 
@@ -533,14 +545,15 @@ window.api.send('channel-name', 'Hello from Renderer');
 window.api.receive('reply-channel', (message) => {
   console.log(message);
 });
-Handling Native Menus and Context Menus
+```
+### Handling Native Menus and Context Menus
 Electron allows you to create custom menus that integrate with the native OS.
 
-Application Menu
+**Application Menu**
+
 Defining a Menu Template:
 
-javascript
-Copy code
+```javascript
 const { Menu } = require('electron');
 
 const menuTemplate = [
@@ -565,16 +578,17 @@ const menuTemplate = [
 
 const menu = Menu.buildFromTemplate(menuTemplate);
 Menu.setApplicationMenu(menu);
-Roles:
+```
+**Roles:**
 
-Predefined actions like undo, redo, cut, copy, paste.
-Context Menu
+- Predefined actions like `undo`, `redo`, `cut`, `copy`, `paste`.
+**Context Menu**
+
 Creating a Context Menu:
 
-In main.js:
+- In `main.js`:
 
-javascript
-Copy code
+```javascript
 const { ipcMain, Menu } = require('electron');
 
 ipcMain.on('show-context-menu', (event) => {
@@ -589,10 +603,11 @@ ipcMain.on('show-context-menu', (event) => {
   const menu = Menu.buildFromTemplate(template);
   menu.popup(BrowserWindow.fromWebContents(event.sender));
 });
-In renderer.js:
+```
 
-javascript
-Copy code
+In `renderer.js`:
+
+```javascript
 window.addEventListener(
   'contextmenu',
   (e) => {
@@ -601,8 +616,9 @@ window.addEventListener(
   },
   false
 );
-Security Note: Avoid using remote module. Use IPC and preload scripts to interact with the main process.
+```
+**Security Note:** Avoid using remote module. Use IPC and preload scripts to interact with the main process.
 
-Context Menu Libraries:
+**Context Menu Libraries:**
 
-Use packages like electron-context-menu for easier implementation.
+- Use packages like `electron-context-menu` for easier implementation.
