@@ -128,68 +128,69 @@ Electron is favored for its ability to deliver a native desktop experience using
 - **Design Tools:** Software for UI/UX design and prototyping.
 
 ## 2. Setting Up the Environment
-Prerequisites (Node.js, npm)
+#### Prerequisites (Node.js, npm)
 Before diving into Electron development, ensure you have the following installed:
 
-Node.js: Provides the runtime environment for executing JavaScript code server-side.
-npm (Node Package Manager): Comes bundled with Node.js, used for installing packages.
+- `Node.js`: Provides the runtime environment for executing JavaScript code server-side.
+- `npm (Node Package Manager):` Comes bundled with Node.js, used for installing packages.
 Installation:
-
-Node.js: Download and install from Node.js official website.
 
 Verify Installation:
 
-bash
-Copy code
+```bash
 node -v   # Should display the Node.js version
 npm -v    # Should display the npm version
-Installing Electron
+```
+#### Installing Electron
 Electron can be installed globally or locally within your project.
 
-Local Installation (Recommended):
+**Local Installation (Recommended):**
 
 Create a Project Directory:
 
-bash
-Copy code
+```bash
 mkdir my-electron-app
 cd my-electron-app
+```
+
 Initialize npm:
 
-bash
-Copy code
+```bash
 npm init -y
+```
 Install Electron as a Development Dependency:
 
-bash
-Copy code
+```bash
 npm install electron --save-dev
+```
+
 Global Installation:
 
-bash
-Copy code
+```bash
 npm install -g electron
+```
 Note: Global installation is less common and not recommended for application development.
 
-Setting Up Your First Electron Project
-Project Structure Overview
+### Setting Up Your First Electron Project
+##### Project Structure Overview
 Your project directory should look like this:
 
-lua
-Copy code
+```lua
 my-electron-app/
 ├── package.json
 ├── main.js
 ├── index.html
 ├── preload.js (optional)
 └── node_modules/
-package.json: Contains project metadata and dependencies.
-main.js: The main process script.
-index.html: The UI of your application.
-preload.js: A script that runs before the renderer process is loaded (used for context bridging).
-Creating main.js
-javascript
-Copy code
+```
+- `package.json:` Contains project metadata and dependencies.
+- `main.js:` The main process script.
+- `index.html:` The UI of your application.
+- `preload.js:` A script that runs before the renderer process is loaded (used for context bridging).
+
+**Creating `main.js`**
+
+```javascript
 // main.js
 const { app, BrowserWindow } = require('electron');
 
@@ -220,9 +221,10 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) createWindow();
 });
-Creating index.html
-html
-Copy code
+```
+**Creating `index.html`**
+
+```html
 <!-- index.html -->
 <!DOCTYPE html>
 <html>
@@ -235,6 +237,7 @@ Copy code
     <script src="renderer.js"></script>
   </body>
 </html>
+```
 (Optional) Creating preload.js
 javascript
 Copy code
