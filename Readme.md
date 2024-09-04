@@ -238,68 +238,74 @@ app.on('activate', () => {
   </body>
 </html>
 ```
-(Optional) Creating preload.js
-javascript
-Copy code
+**(Optional) Creating `preload.js`**
+```javascript
 // preload.js
 const { contextBridge } = require('electron');
 
 contextBridge.exposeInMainWorld('myAPI', {
   // Expose APIs here
 });
-Running Your First Electron App
-Update package.json:
+```
+### Running Your First Electron App
+
+**Update `package.json:`**
 
 Add a start script:
 
-json
-Copy code
+```json
 "scripts": {
   "start": "electron ."
 }
+```
 Start the Application:
 
-bash
-Copy code
+```bash
 npm start
+```
+
 An Electron window should appear displaying "Hello, Electron!".
 
-3. Core Concepts
-Main Process vs Renderer Process
+## 3. Core Concepts
+### Main Process vs Renderer Process
 Understanding Electron's multi-process architecture is crucial.
 
-Main Process
-Role: Controls the lifecycle of the application.
-Characteristics:
-Runs main.js.
-Manages native GUI elements (windows, menus).
-Has full access to Node.js APIs.
-Single instance per application.
-Renderer Process
-Role: Manages each window's web content.
-Characteristics:
-Runs web pages (like index.html).
-Limited or no access to Node.js APIs (for security).
-Multiple instances (one per window).
-Similar to a browser tab in Chrome.
-Communication Between Processes:
+### Main Process
+- **Role:** Controls the lifecycle of the application.
+- **Characteristics:**
+
+    - Runs `main.js`.
+    - Manages native GUI elements (windows, menus).
+    - Has full access to Node.js APIs.
+    - Single instance per application.
+
+### Renderer Process
+- **Role:** Manages each window's web content.
+- **Characteristics:**
+
+    - Runs web pages (like `index.html`).
+    - Limited or no access to Node.js APIs (for security).
+    - Multiple instances (one per window).
+    - Similar to a browser tab in Chrome.
+#### Communication Between Processes:
 
 Use Electron's Inter-Process Communication (IPC) modules: ipcMain and ipcRenderer.
-Understanding the package.json File
+
+### Understanding the `package.json` File
 The package.json file is essential for defining your application's metadata and dependencies.
 
-Key Fields:
+#### Key Fields:
 
-name: The application name.
-version: The current version.
-main: Entry point for the main process (main.js).
-scripts: Commands that can be run using npm run <script-name>.
-dependencies: Packages required at runtime.
-devDependencies: Packages required during development.
+- **name:** The application name.
+- **version:** The current version.
+- **main:** Entry point for the main process (main.js).
+- **scripts:** Commands that can be run using npm run <script-name>.
+- **dependencies:** Packages required at runtime.
+- **devDependencies:** Packages required during development.
+
 Example:
 
-json
-Copy code
+```json
 {
   "name": "my-electron-app",
   "version": "1.0.0",
@@ -311,6 +317,7 @@ Copy code
     "electron": "^25.0.0"
   }
 }
+```
 Using main.js and index.html
 main.js: Manages the application's lifecycle, creates windows, and handles system events.
 index.html: The front-end interface displayed in the application window.
